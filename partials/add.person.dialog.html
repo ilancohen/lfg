@@ -1,0 +1,20 @@
+<md-dialog aria-label="Add Person">
+    <md-content class="sticky-container">
+        <md-subheader class="md-sticky-no-effect">Add Person</md-subheader>
+        <div class="dialog-content">
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="items.person.name">
+            </md-input-container>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="hideDialog(items.person)">
+            Save
+        </md-button>
+        <md-button ng-click="hideDialog()">
+            Cancel
+        </md-button>
+    </div>
+</md-dialog>
