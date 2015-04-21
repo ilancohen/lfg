@@ -3,7 +3,8 @@ angular.module('LFG.Group').service('dataService', ['$rootScope', function($root
 	data = angular.fromJson(angular.fromJson(localStorage.getItem('data')));
 	data = data || {
 		people: {
-			me: 'Sample Person'
+			me: 'Sample Person',
+			groups: [] 
 		},
 		groups: {
 
