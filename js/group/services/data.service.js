@@ -1,7 +1,17 @@
 angular.module('LFG.Group').service('dataService', ['$rootScope', function($rootScope) {
 	var data = {};
 	data = angular.fromJson(angular.fromJson(localStorage.getItem('data')));
-	data = data || {};
+	data = data || {
+		people: {
+			me: 'Sample Person'
+		},
+		groups: {
+
+		},
+		courses: {
+
+		}
+	};
 
 	function s4() {
 		return (Math.floor((1 + Math.random()) * 0x10000)
