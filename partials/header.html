@@ -1,0 +1,14 @@
+<header class="main-header">
+  <div class="header-inner">
+    <!--a class="pull-left glyphicon glyphicon-chevron-left back-button" ng-click="goBack()"></a-->
+    <a href="/#/" class="title">Flashcards+</a>
+    <!--a class="pull-right glyphicon glyphicon-cog"  ng-click=""></a-->
+    <div class="pull-right backup-info">
+      <a  class="backup-link"  ng-click="backupData()">
+        <i class="glyphicon glyphicon-repeat" ng-class="{'rotating' :  isBackingUp}"></i>
+        backup
+      </a>
+      <span>Last backed up: {{ backupTime || 'never' | date : 'short'}}</span>
+    </div>
+  </div>
+</header>

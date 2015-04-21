@@ -1,0 +1,14 @@
+<md-dialog aria-label="Person Details">
+    <md-content class="sticky-container">
+        <md-subheader class="md-sticky-no-effect">Person Details</md-subheader>
+        <div class="dialog-content">
+            <p>{{  items.person.name }}</p>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="hideDialog()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

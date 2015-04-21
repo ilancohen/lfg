@@ -1,0 +1,168 @@
+<!doctype html>
+<html ng-app="LFG" lang="en">
+	<head>
+        <link href="bower_components/material-design-iconic-font/css/material-design-iconic-font.css" rel="stylesheet">
+        <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+        <link href="bower_components/angular-material/modules/css/angular-material-layout.css" rel="stylesheet">
+		<link href="css/theme.css" rel="stylesheet" />
+		<link href="css/styles.css" rel="stylesheet" />
+
+
+    </head>
+	<body ng-controller="GroupController" class="layout-content" layout="column" md-theme="default">
+        <section class="main" ng-cloak>
+            <md-toolbar layout="row">
+                <h1>Looking for Group {{ isCollegeSelected() ? ' in ' + data.selectedCollege : '' }}</h1>
+            </md-toolbar>
+            <div class="main-content">
+                <md-tabs>
+                    <md-tab label="Choose College">
+                        <md-content class="md-padding" layout="column" flex>
+                            <md-input-container flex>
+                                <label>
+                                    {{ selectedCollege }}
+                                </label>
+                            </md-input-container>
+                            <md-select ng-model="data.selectedCollege" placeholder="Choose College">
+                                <md-option ng-value="college" ng-repeat="college in colleges">{{ college }}</md-option>
+                            </md-select>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Find Group" tab-disable >
+                        <md-content class="md-padding" layout="column" flex>
+                            <md-input-container flex>
+                                <label>
+                                    <md-icon class="md-2x md-flip-horizontal" md-font-icon="md-search" alt="search "></md-icon>
+                                    Search for Course
+                                </label>
+                                <input type="text" ng-model="searchCourse">
+                            </md-input-container>
+
+                           <div layout="row" flex class="courses accordion">
+                                <div class="accordion-item" layout="column" flex="{{ getColWidth('courses') }}">
+                                    <h2>Available Courses</h2>
+                                    <md-list flex>
+                                        <md-item ng-repeat="course in getCourses() | filter: searchCourse">
+                                            <md-item-content ng-click="selectCourse(course.id)" ng-class="{ 'selected' : (selectedCourse === course.id) }" class="">
+                                                <div class="md-tile-left">
+                                                    {{  course.id }}
+                                                </div>
+                                                <div class="md-tile-content one-line">
+                                                    {{  course.name }}
+                                                </div>
+                                            </md-item-content>
+                                        </md-item>
+                                    </md-list>
+                                    <div layout="row">
+                                        <span flex></span>
+                                        <md-button class="md-fab md-warn add-button" ng-click="showAddCourse(selectedCourse)">
+                                            <md-icon class="md-2x" md-font-icon="md-add" alt="Add Course"></md-icon>
+                                            <md-tooltip>
+                                                Add Course
+                                            </md-tooltip>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <div class="accordion-item" layout="column" flex="{{ getColWidth('groups') }}" show-item="{{ isItemShown('groups') }}">
+                                    <h2>Groups in Course {{ selectedCourse }}</h2>
+                                    <md-list flex>
+                                        <md-item ng-repeat="group in getGroups(selectedCourse)">
+                                            <md-item-content ng-click="selectGroup(group.id)" ng-class="{ 'selected' : (selectedGroup === group.id) }">
+                                                <md-button class="md-raised md-primary md-hue-4 md-icon-button" aria-label="Profile">
+                                                    <md-icon class="md-2x" md-font-icon="md-people" alt="people"></md-icon> {{ getGroupSize(group.id) }}
+                                                </md-button>
+                                                <div class="md-tile-content one-line">
+                                                    {{  group.name }}
+                                                </div>
+                                                <md-button class="md-raised md-primary" ng-click="joinGroup(group.id, $event)" ng-if="!isInGroup(me.id, group.id)">Join</md-button>
+                                                <md-button class="md-raised md-warn" ng-click="leaveGroup(group.id, $event)" ng-if="isInGroup(me.id, group.id)">Leave</md-button>
+                                            </md-item-content>
+                                        </md-item>
+                                    </md-list>
+                                    <div layout="row">
+                                        <span flex></span>
+                                        <md-button class="md-fab md-warn add-button" ng-click="showAddGroup(selectedCourse)">
+                                            <md-icon class="md-2x" md-font-icon="md-add" alt="Add Group"></md-icon>
+                                            <md-tooltip>
+                                                Add Group
+                                            </md-tooltip>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <div class="accordion-item" layout="column" flex="{{ getColWidth('people') }}" show-item="{{ isItemShown('people') }}">
+                                    <h2>People in Group</h2>
+                                    <md-list flex>
+                                        <md-item ng-repeat="person in getPeople(selectedGroup, true)">
+                                            <md-item-content ng-click="selectPerson(person, $event)">
+                                                <div class="md-tile-content one-line">
+                                                    {{  person.name }}
+                                                </div>
+                                                <md-button class="md-raised md-warn" ng-click="removePersonFromGroup(person.id, selectedGroup, $event)">Remove</md-button>
+                                            </md-item-content>
+                                        </md-item>
+                                    </md-list>
+                                    <div layout="row">
+                                        <span flex></span>
+                                        <md-button class="md-fab md-warn add-button" ng-click="showAddPerson(selectedGroup)">
+                                            <md-icon class="md-2x" md-font-icon="md-add" alt="Add Person"></md-icon>
+                                            <md-tooltip>
+                                                Add Person
+                                            </md-tooltip>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="My Groups" tab-disable >
+                        <md-content class="md-padding" layout="column" flex>
+                            <div layout="row" flex class="courses accordion">
+                                <div class="accordion-item" layout="column" flex="50">
+                                    <h2>Groups</h2>
+                                    <md-list flex>
+                                        <md-item ng-repeat="group in getMyGroups()">
+                                            <md-item-content ng-click="selectMyGroup(group.id)" ng-class="{ 'selected' : (mySelectedGroup === group.id) }">
+                                                <md-button class="md-raised md-primary md-hue-4 md-icon-button" aria-label="Profile">
+                                                    <md-icon class="md-2x" md-font-icon="md-people" alt="people"></md-icon> {{ getGroupSize(group.id) }}
+                                                </md-button>
+                                                <div class="md-tile-content one-line">
+                                                    {{  group.name }}
+                                                </div>
+                                                <md-button class="md-raised md-warn" ng-click="leaveGroup(group.id, $event)" ng-if="isInGroup(me.id, group.id)">Leave</md-button>
+                                            </md-item-content>
+                                        </md-item>
+                                    </md-list>
+                                </div>
+                                <div class="accordion-item" layout="column" flex="50" show-item="{{ isItemShown('myPeople') }}">
+                                    <h2>People in Group</h2>
+                                    <md-list flex>
+                                        <md-item ng-repeat="person in getPeople(mySelectedGroup, true)">
+                                            <md-item-content ng-click="selectPerson(person, $event)">
+                                                <div class="md-tile-content one-line">
+                                                    {{  person.name }}
+                                                </div>
+                                            </md-item-content>
+                                        </md-item>
+                                    </md-list>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </section>
+	</body>
+    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-material/angular-material.min.js" type="text/javascript"></script>
+
+
+    <script src="js/app/app.js" type="text/javascript"></script>
+    <script src="js/group/group.module.js" type="text/javascript"></script>
+    <script src="js/group/controllers/group.controller.js" type="text/javascript"></script>
+    <script src="js/group/services/data.service.js" type="text/javascript"></script>
+    <script src="js/group/directives/dynamic.tab.disable.directive.js" type="text/javascript"></script>
+</html>

@@ -1,0 +1,20 @@
+<md-dialog aria-label="Add Group">
+    <md-content class="sticky-container">
+        <md-subheader class="md-sticky-no-effect">Add Group</md-subheader>
+        <div class="dialog-content">
+            <md-input-container>
+                <label>Group Name</label>
+                <input ng-model="items.group.name">
+            </md-input-container>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="hideDialog(items.group)">
+            Save
+        </md-button>
+        <md-button ng-click="hideDialog()">
+            Cancel
+        </md-button>
+    </div>
+</md-dialog>

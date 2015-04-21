@@ -1,0 +1,128 @@
+@import "compass/css3";
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    background-color: #f5f5f5;
+	font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.main-content {
+	max-width: 960px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+md-icon {
+	position: relative;
+	top: -0.2em;
+
+	.md-add {
+		text-indent: -0.05em;
+	}
+}
+
+.add-button {
+	.md-font {
+		font-weight: bold;
+	}
+}
+
+md-toolbar h1 {
+	margin: auto;
+	line-height: 50px;
+	padding-left: 15px;
+}
+
+.md-icon-button {
+	md-icon {
+		margin-right: 5px;
+	}
+}
+
+$accordion-border-width: 1px;
+
+.accordion {
+	.accordion-item {
+		overflow: hidden;
+		border: $accordion-border-width solid #C5CAE9;
+		border-left-width: 0;
+		padding: 0 20px 20px 20px;
+		@include transition(all 500ms);
+
+		&:first-child {
+			border-left-width: $accordion-border-width;
+		}
+
+		&[flex="0"] {
+			padding: 0;
+			border-right-width: 0;
+		}
+	}
+}
+
+@media (max-width: 800px) {
+	.accordion {
+		.accordion-item {
+			h2 {
+				font-size: 20px;
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	.accordion {
+		display: block;
+
+		.accordion-item {
+			display: block;
+			max-width: 100%;
+			border-left-width: $accordion-border-width;
+			border-top-width: 0;
+
+			&:first-child {
+				border-top-width: $accordion-border-width;
+			}
+
+			&[show-item="false"] {
+				display: none;
+			}
+		}
+	}
+}
+
+.one-line {
+	white-space: nowrap;
+	word-break: normal;
+	overflow: hidden;
+}
+
+.courses {
+	h2 {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	md-item-content{
+		@include transition(all 500ms);
+
+		padding: 0 5px 0 15px;
+
+		&:hover {
+			background-color: #C5CAE9;
+		}
+
+		&.selected {
+			background-color: #E8EAF6;
+		}
+	}
+}
+
+@import "test";

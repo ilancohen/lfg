@@ -1,0 +1,266 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  background-color: #f5f5f5;
+  font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.main-content {
+  max-width: 960px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+md-icon {
+  position: relative;
+  top: -0.2em;
+}
+md-icon .md-add {
+  text-indent: -0.05em;
+}
+
+.add-button .md-font {
+  font-weight: bold;
+}
+
+md-toolbar h1 {
+  margin: auto;
+  line-height: 50px;
+  padding-left: 15px;
+}
+
+.md-icon-button md-icon {
+  margin-right: 5px;
+}
+
+.accordion .accordion-item {
+  overflow: hidden;
+  border: 1px solid #C5CAE9;
+  border-left-width: 0;
+  padding: 0 20px 20px 20px;
+  -moz-transition: all 500ms;
+  -o-transition: all 500ms;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+}
+.accordion .accordion-item:first-child {
+  border-left-width: 1px;
+}
+.accordion .accordion-item[flex="0"] {
+  padding: 0;
+  border-right-width: 0;
+}
+
+@media (max-width: 800px) {
+  .accordion .accordion-item h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .accordion {
+    display: block;
+  }
+  .accordion .accordion-item {
+    display: block;
+    max-width: 100%;
+    border-left-width: 1px;
+    border-top-width: 0;
+  }
+  .accordion .accordion-item:first-child {
+    border-top-width: 1px;
+  }
+  .accordion .accordion-item[show-item="false"] {
+    display: none;
+  }
+}
+.one-line {
+  white-space: nowrap;
+  word-break: normal;
+  overflow: hidden;
+}
+
+.courses h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.courses md-item-content {
+  -moz-transition: all 500ms;
+  -o-transition: all 500ms;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+  padding: 0 5px 0 15px;
+}
+.courses md-item-content:hover {
+  background-color: #C5CAE9;
+}
+.courses md-item-content.selected {
+  background-color: #E8EAF6;
+}
+
+.deck-title {
+  position: relative;
+}
+.deck-title a {
+  cursor: pointer;
+}
+
+.deck-metadata {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+.deck-metadata .deck-name {
+  font-size: 24px;
+  line-height: 26px;
+  color: #333333;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+.deck {
+  position: relative;
+}
+.deck h5 {
+  font-size: 20px;
+  display: inline-block;
+  width: 45%;
+  margin: 15px 4% 15px 0;
+}
+.deck h5 select {
+  font-size: 14px;
+  float: right;
+}
+.deck .cards {
+  margin-top: 10px;
+}
+.deck .cards .sortable-placeholder {
+  border: 4px dashed #CCC;
+}
+.deck .cards li {
+  padding: 10px 15px;
+  overflow: hidden;
+}
+.deck .cards li .card-info {
+  width: 90%;
+  display: inline-block;
+}
+.deck .cards li .card-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin-bottom: 10px;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+.deck .cards li .card-image:hover {
+  border-color: #000;
+}
+.deck .cards li .card-number {
+  width: 3.5%;
+  margin-right: 1%;
+  margin-left: 0.5%;
+  display: inline-block;
+  padding-top: 4px;
+  font-size: 18px;
+}
+.deck .cards li .card-title,
+.deck .cards li .card-description {
+  display: inline-block;
+  width: 44%;
+  margin-right: 2%;
+  padding: 4px;
+  vertical-align: top;
+}
+.deck .cards li .card-title textarea,
+.deck .cards li .card-description textarea {
+  width: 80%;
+  display: inline-block;
+  padding: 6px;
+}
+.deck .cards li .card-title .add-image,
+.deck .cards li .card-description .add-image {
+  font-size: 10px;
+  display: inline-block;
+  width: 12%;
+  margin-left: 3%;
+  color: #ddd;
+  cursor: pointer;
+  vertical-align: top;
+  position: relative;
+  top: -16px;
+  line-height: 1.7;
+  overflow: visible;
+  white-space: normal;
+}
+.deck .cards li .card-title .add-image:hover,
+.deck .cards li .card-description .add-image:hover {
+  color: #337ab7;
+  text-decoration: none;
+}
+.deck .cards li .card-title .add-image i,
+.deck .cards li .card-description .add-image i {
+  font-size: 30px;
+}
+.deck .cards li .card-title .add-image span,
+.deck .cards li .card-description .add-image span {
+  white-space: nowrap;
+}
+.deck .cards li .card-title .add-image input[type="file"],
+.deck .cards li .card-description .add-image input[type="file"] {
+  width: 50px;
+  display: block;
+  position: absolute;
+  height: 45px;
+  top: 17px;
+  left: 0;
+  opacity: 0;
+}
+.deck .cards li .card-title > *,
+.deck .cards li .card-description > * {
+  white-space: pre-line;
+}
+.deck .cards li .handle {
+  position: absolute;
+  top: 14px;
+  font-size: 36px;
+  line-height: 22px;
+  opacity: 0.1;
+  cursor: move;
+}
+.deck .cards li .handle:hover {
+  opacity: 0.5;
+}
+.deck .cards li .handle.handle-left {
+  left: -16px;
+}
+.deck .cards li .handle.handle-right {
+  right: -16px;
+}
+.deck .cards li .delete {
+  display: inline-block;
+  color: #ccc;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+}
+.deck .cards li .delete:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+.deck .cards li .handle,
+.deck .cards li .delete {
+  visibility: hidden;
+}
+.deck .cards li:hover .handle,
+.deck .cards li:hover .delete {
+  visibility: visible;
+}
+.deck .cards li.new-card .handle,
+.deck .cards li.new-card .delete {
+  display: none;
+}
