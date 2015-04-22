@@ -55,6 +55,9 @@ md-toolbar h1 {
   padding: 0;
   border-right-width: 0;
 }
+.accordion .accordion-item h2 {
+  font-size: 23px;
+}
 
 @media (max-width: 800px) {
   .accordion .accordion-item h2 {
